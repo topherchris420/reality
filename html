@@ -1,0 +1,71 @@
+# Define a class to represent an Adinkra symbol
+class AdinkraSymbol:
+    def __init__(self, name, function, description):
+        self.name = name
+        self.function = function  # Computational logic (a function)
+        self.description = description
+
+    def compute(self, *args):
+        return self.function(*args)
+
+# Define different Adinkra symbols with associated computational logic
+def unity(a, b):
+    return a + b
+
+def balance(a, b):
+    return abs(a - b)
+
+def strength(a):
+    return a * a
+
+def wisdom(a): # The wisdom function only takes one argument
+    return a / 2
+
+# Create instances of Adinkra symbols with their computational meanings
+adinkra_symbols = {
+    "Unity": AdinkraSymbol("Unity", unity, "Symbol of togetherness (a + b)"),
+    "Balance": AdinkraSymbol("Balance", balance, "Symbol of equilibrium (|a - b|)"),
+    "Strength": AdinkraSymbol("Strength", strength, "Symbol of inner strength (a^2)"),
+    "Wisdom": AdinkraSymbol("Wisdom", wisdom, "Symbol of wisdom (a / 2)")
+}
+
+# Function to display available Adinkra symbols
+def display_symbols():
+    print("Available Adinkra Symbols:")
+    for symbol in adinkra_symbols.values():
+        print(f"{symbol.name}: {symbol.description}")
+
+# Simple user interface to allow users to snap together Adinkra symbols
+def snap_symbols():
+    print("Welcome to Adinkra Computing!")
+    display_symbols()
+
+    # Example interaction to use two symbols
+    choice1 = input("Choose the first symbol (Unity, Balance, Strength, Wisdom): ").strip()
+    choice2 = input("Choose the second symbol (Unity, Balance, Strength, Wisdom): ").strip()
+
+    if choice1 in adinkra_symbols and choice2 in adinkra_symbols:
+        symbol1 = adinkra_symbols[choice1]
+        symbol2 = adinkra_symbols[choice2]
+
+        # Example computation with two symbols
+        print(f"Using {symbol1.name} and {symbol2.name} together.")
+
+        # Use a conditional to only pass one argument to wisdom
+        if symbol1.name == "Wisdom":
+            result = symbol1.compute(10)  # Example value for demonstration
+        else:
+            result = symbol1.compute(10, 5)  # Example values for demonstration
+
+        if symbol2.name == "Wisdom":
+            result2 = symbol2.compute(5)  # Using a different value for the second symbol
+        else:
+            result2 = symbol2.compute(10, 5)  # Using the same values for the second symbol
+
+        print(f"Result from {symbol1.name}: {result}")
+        print(f"Result from {symbol2.name}: {result2}")
+    else:
+        print("Invalid symbol choices. Try again.")
+
+# Run the interactive program
+snap_symbols()
